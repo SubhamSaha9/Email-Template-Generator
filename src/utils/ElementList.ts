@@ -1,6 +1,6 @@
 
 
-import { Columns2, Facebook, Frame, Framer, Image, Link2, PanelTop, Projector, RectangleEllipsis, SquareSplitVertical, Text, TextSelectionIcon, Twitter } from "lucide-react";
+import { Columns2, Facebook, Frame, Framer, Image, Link2, Link2Icon, PanelTop, Projector, RectangleEllipsis, SquareSplitVertical, Text, TextSelectionIcon, Twitter } from "lucide-react";
 import { LayoutListsInterface } from "./Layout";
 
 export interface ElementListInterface
@@ -48,6 +48,28 @@ export default [
         style: {
             backgroundColor: '#FFFFFF',
             color: '#000000',
+            padding: '10px',
+            textAlign: 'center',
+            fontSize: '22px',
+            fontWeight: 'normal',
+            fontStyle: 'normal',
+            textDecoration: 'none',
+            textTransform: 'capitilized'//lowercase , capitilized
+        },
+        outerStyle: {
+            backgroundColor: '#FFFFFF',
+            width: '100%'
+        }
+    },
+    {
+        icon: Link2Icon,
+        type: 'Link',
+        label: 'Link',
+        textarea: 'Sample Link',
+        url: '#',
+        style: {
+            backgroundColor: '#FFFFFF',
+            color: '#0096FF',
             padding: '10px',
             textAlign: 'center',
             fontSize: '22px',

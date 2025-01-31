@@ -12,6 +12,7 @@ import LogoComponent from "./LogoComponent";
 import Divider from "./Divider";
 import SocialComponent from "./SocialComponent";
 import { ArrowDown, ArrowUp, Trash } from "lucide-react";
+import LinkComponent from "./LinkComponent";
 
 interface DragEvent {
   index: number;
@@ -56,6 +57,8 @@ const Column = ({ layout }: any) => {
         return <ButtonComponent {...element} />;
       case "Text":
         return <TextComponemt {...element} />;
+      case "Link":
+        return <LinkComponent {...element} />;
       case "Image":
         return <ImageComponent {...element} />;
       case "Logo":
