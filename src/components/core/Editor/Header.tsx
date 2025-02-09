@@ -6,7 +6,7 @@ import { Code2, MonitorIcon, Smartphone } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const Header = () => {
+const Header = ({ setViewHTML }: { setViewHTML: (value: boolean) => void }) => {
   const dispatch = useAppDispatch();
   const { screenSize } = useAppSelector((state) => state.screen);
   return (
@@ -35,6 +35,7 @@ const Header = () => {
         <Button
           variant="ghost"
           className="hover:text-primary hover:bg-purple-50"
+          onClick={() => setViewHTML(true)}
         >
           <Code2 className="w-2 h-2" />
         </Button>

@@ -1,15 +1,24 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setEmailTemplate } from "@/lib/slice/dragdropSlice";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Column from "./Canvas/Column";
+import ViewHtmlDialog from "./ViewHtmlDialog";
 
-const Canvas = () => {
+const Canvas = ({
+  viewHTML,
+  closeDialog,
+}: {
+  viewHTML: boolean;
+  closeDialog: (value: boolean) => void;
+}) => {
   const { screenSize } = useAppSelector((state) => state.screen);
+  const htmlRef = useRef<HTMLDivElement>(null);
   const { dragElementLayout, emailTemplate } = useAppSelector(
     (state) => state.dragDrop
   );
   const [dragOver, setDragOver] = useState(false);
+  const [htmlCode, setHtmlCode] = useState();
   const dispatch = useAppDispatch();
 
   const ondragover = (e: React.DragEvent<HTMLDivElement>) => {
@@ -32,6 +41,17 @@ const Canvas = () => {
       return <Column layout={layout} />;
     }
   };
+
+  const getHTMLCode = () => {
+    if (htmlRef.current) {
+      const html = htmlRef.current.innerHTML;
+      setHtmlCode(html as any);
+    }
+  };
+
+  useEffect(() => {
+    viewHTML && getHTMLCode();
+  }, [viewHTML]);
   return (
     <div className="flex mt-20 justify-center">
       <div
@@ -41,6 +61,7 @@ const Canvas = () => {
         `}
         onDragOver={(e) => ondragover(e)}
         onDrop={handleOnDropEvent}
+        ref={htmlRef}
       >
         {emailTemplate?.length > 0 ? (
           emailTemplate.map((layout: any, i: number) => (
@@ -52,6 +73,12 @@ const Canvas = () => {
           </h2>
         )}
       </div>
+
+      <ViewHtmlDialog
+        openDialog={viewHTML}
+        htmlCode={htmlCode}
+        closeDialog={closeDialog}
+      />
     </div>
   );
 };
