@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAppSelector } from "@/lib/hooks";
 import Prompt from "@/utils/Prompt";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -12,6 +13,8 @@ const AiInputBox = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [userInput, setUserInput] = useState<string>("");
   const { user } = useAppSelector((state) => state.auth);
+  const router = useRouter();
+
   const handleGenerateResponse = async () => {
     const prompt = Prompt.EMAIL_PROMPT + "\n-" + userInput;
     setLoading(true);
@@ -22,8 +25,18 @@ const AiInputBox = () => {
         email: user.email,
         tId: "0",
       };
-      const { data } = await axios.post("/api/ai-email-generate", options);
-      console.log(data);
+      const { data } = await axios.post(
+        "/api/templates/ai-email-generate",
+        options
+      );
+      setLoading(false);
+      toast.dismiss(toastId);
+      if (!data.success) {
+        toast.error(data.message);
+        return;
+      }
+      toast.success(data.message);
+      router.push("/editor/" + data.data._id);
     } catch (error: any) {
       console.log(error);
       toast.error(error?.response?.data?.message || error.message);
