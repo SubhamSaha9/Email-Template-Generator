@@ -23,7 +23,7 @@ const AiInputBox = () => {
       const options = {
         prompt: prompt,
         email: user.email,
-        tId: "0",
+        description: userInput,
       };
       const { data } = await axios.post(
         "/api/templates/ai-email-generate",
@@ -35,8 +35,8 @@ const AiInputBox = () => {
         toast.error(data.message);
         return;
       }
-      toast.success(data.message);
       router.push("/editor/" + data.data._id);
+      toast.success(data.message);
     } catch (error: any) {
       console.log(error);
       toast.error(error?.response?.data?.message || error.message);

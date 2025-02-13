@@ -27,7 +27,6 @@ const Canvas = ({
   };
 
   const handleOnDropEvent = () => {
-    console.log(dragElementLayout);
     if (dragElementLayout?.dragLayout) {
       dispatch(
         setEmailTemplate([...emailTemplate, dragElementLayout?.dragLayout])

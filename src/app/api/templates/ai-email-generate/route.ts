@@ -7,8 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 connect();
 export async function POST(req: NextRequest){
     try {
-        const {prompt,email} = await req.json();
-        if (!prompt || !email) {
+        const {prompt,email, description} = await req.json();
+        if (!prompt || !email || !description) {
             return NextResponse.json(
                 {
                     success: false,
@@ -44,6 +44,7 @@ export async function POST(req: NextRequest){
         const newTemplate = await Template.create({
             design:AIResponse,
             createdBy: user._id,
+            description: description
         })
         return NextResponse.json(
             {

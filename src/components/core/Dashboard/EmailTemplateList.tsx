@@ -21,7 +21,7 @@ const EmailTemplateList = () => {
           <Image src="/email.png" height={250} width={250} alt="No Data" />
           <Button
             className="flex items-center gap-2 mt-4"
-            onClick={() => router.push("/create")}
+            onClick={() => router.push("/dashboard/create")}
           >
             <PlusIcon className="h-4 w-4" />
             Create New

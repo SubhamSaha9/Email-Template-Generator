@@ -1,7 +1,6 @@
 import React from "react";
 
 const ImageComponent = ({ style, outerStyle, imageUrl, url }: any) => {
-  console.log(url);
   return (
     <div>
       {url === "" || url === "#" || !url?.includes("https://") ? (

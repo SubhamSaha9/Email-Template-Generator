@@ -34,7 +34,7 @@ const ViewHtmlDialog = ({
   return (
     <div>
       <Dialog open={openDialog} onOpenChange={(v) => closeDialog(v)}>
-        <DialogContent className="w-full h-auto max-w-2xl p-4">
+        <DialogContent className="w-full h-1/2 max-w-2xl p-4">
           <DialogHeader className="mb-2">
             <DialogTitle asChild>
               <div className="flex items-center justify-between">
@@ -45,7 +45,7 @@ const ViewHtmlDialog = ({
             </DialogTitle>
           </DialogHeader>
           <DialogDescription asChild>
-            <div className="h-auto overflow-hidden rounded-md border">
+            <div className="h-auto overflow-auto rounded-md border">
               <div className="h-full overflow-auto border-2 border-dotted border-gray-400 rounded-md bg-gray-200">
                 <SyntaxHighlighter
                   language="htmlbars"

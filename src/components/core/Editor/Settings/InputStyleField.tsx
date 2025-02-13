@@ -21,7 +21,7 @@ const InputStyleField = ({
       <Label>{label}</Label>
       <div className="flex">
         <Input
-          value={formatValue(value)}
+          value={formatValue(value) ?? "val"}
           onChange={(e) => handleStyleChange(e.target.value + type)}
         />
         <h2 className="p-1.5 bg-gray-100 rounded-r-lg -ml-1">{type}</h2>
