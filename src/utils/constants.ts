@@ -1,4 +1,40 @@
-import { AlignCenter, AlignLeft, AlignRight, CaseLower, CaseSensitive, CaseUpper, Columns2, Italic, SquareSplitVertical, Type } from "lucide-react";
+import { AlignCenter, AlignLeft, AlignRight, CaseLower, CaseSensitive, CaseUpper, Columns2, Github, Home, Italic, LayoutDashboard, LogOut, SquareSplitVertical, Type } from "lucide-react";
+
+export const navMenuHome = [
+    {
+        name: "Dashboard",
+        to: "/dashboard",
+        icon: LayoutDashboard,
+    },
+    {
+        name: "GitHub",
+        to: "https://github.com/SubhamSaha9",
+        icon: Github,
+    },
+    {
+        name: "Logout",
+        to: "/api/users/logout",
+        icon: LogOut,
+    }
+]
+
+export const navMenuDash = [
+    {
+        name: "Home",
+        to: "/",
+        icon: Home,
+    },
+    {
+        name: "GitHub",
+        to: "https://github.com/SubhamSaha9",
+        icon: Github,
+    },
+    {
+        name: "Logout",
+        to: "/api/users/logout",
+        icon: LogOut,
+    }
+]
 
 export const alignItemOptions = [
     {

@@ -1,17 +1,42 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/lib/hooks";
+import axios from "axios";
 import { PlusIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface EmailTemplate {
   _id: string;
-  // add other properties if needed
+  design: string;
+  description: string;
 }
 const EmailTemplateList = () => {
+  const { user } = useAppSelector((state) => state.auth);
   const [emailList, setEmailList] = useState<EmailTemplate[]>([]);
   const router = useRouter();
+
+  const getAllTemplates = async () => {
+    try {
+      const { data } = await axios.post("/api/templates", { id: user._id });
+
+      if (!data.success) {
+        toast.error(data.message);
+        return;
+      }
+
+      setEmailList(data.data);
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || error?.message);
+    }
+  };
+
+  useEffect(() => {
+    user._id && getAllTemplates();
+  }, [user]);
   return (
     <div className="mt-6">
       <h2 className="text-xl font-bold text-primary">My WorkSpace</h2>
@@ -28,25 +53,28 @@ const EmailTemplateList = () => {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
           {emailList.map((template, i) => (
             <div
               key={i}
-              className="bg-white shadow-md rounded-lg p-4 border border-gray-200 hover:shadow-lg transition
-            cursor-pointer
-            "
-              onClick={() => router.push(`/editor/${template?._id}`)}
+              className="shadow-md rounded-lg p-5 border border-gray-200 hover:shadow-lg transition"
             >
-              <h3 className="text-lg font-semibold text-gray-800">
-                Template ID:
-              </h3>
-              <p className="text-gray-600 text-sm break-all">{template._id}</p>
               <Image
                 src="/emailbox.png"
-                height={250}
-                width={250}
+                height={200}
+                width={200}
                 alt="No Data"
+                className="w-full"
               />
+              <p className="text-gray-600 mt-2 text-sm line-clamp-2">
+                {template.description}
+              </p>
+              <Button
+                className="w-full mt-2"
+                onClick={() => router.push("/editor/" + template._id)}
+              >
+                Visit/Edit
+              </Button>
             </div>
           ))}
         </div>

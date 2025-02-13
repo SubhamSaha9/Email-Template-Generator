@@ -5,6 +5,7 @@ const initialState = {
         firstName: "",
         lastName: "",
         image: "",
+        _id: ""
     },
     token: null,
 };
