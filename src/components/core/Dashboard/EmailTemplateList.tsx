@@ -20,7 +20,7 @@ const EmailTemplateList = () => {
 
   const getAllTemplates = async () => {
     try {
-      const { data } = await axios.post("/api/templates", { id: user._id });
+      const { data } = await axios.post("/api/templates", { id: user?._id });
 
       if (!data.success) {
         toast.error(data.message);
@@ -35,7 +35,7 @@ const EmailTemplateList = () => {
   };
 
   useEffect(() => {
-    user._id && getAllTemplates();
+    user?._id && getAllTemplates();
   }, [user]);
   return (
     <div className="mt-6">
