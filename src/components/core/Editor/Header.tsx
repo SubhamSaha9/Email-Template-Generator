@@ -4,14 +4,16 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setEmailTemplate } from "@/lib/slice/dragdropSlice";
 import { setScreenSize } from "@/lib/slice/screenSizeSlice";
 import axios from "axios";
-import { Code2, MonitorIcon, Smartphone } from "lucide-react";
+import { ChevronLeft, Code2, MonitorIcon, Smartphone } from "lucide-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const Header = ({ setViewHTML }: { setViewHTML: (value: boolean) => void }) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { editorId } = useParams();
   const { screenSize } = useAppSelector((state) => state.screen);
   const { emailTemplate } = useAppSelector((state) => state.dragDrop);
@@ -42,8 +44,18 @@ const Header = ({ setViewHTML }: { setViewHTML: (value: boolean) => void }) => {
   };
   return (
     <div className="p-4 shadow-sm flex items-center justify-between">
-      <div className="mr-48 ml-4">
-        <Image src={"/logo.svg"} height={60} width={50} alt="logo" />
+      <div className="mr-44 ml-4 flex gap-6 items-center">
+        <Link href={"/"}>
+          <Image src={"/logo.svg"} height={60} width={50} alt="logo" />
+        </Link>
+        <Button
+          variant="outline"
+          className="group"
+          onClick={() => router.back()}
+        >
+          <ChevronLeft className="h-5 group-hover:scale-110 transition-all delay-75" />
+          Back
+        </Button>
       </div>
 
       <div className="flex items-center gap-5">

@@ -16,6 +16,7 @@ import { navMenuDash, navMenuHome } from "@/utils/constants";
 import { setToken, setUser } from "@/lib/slice/authSlice";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Link from "next/link";
 
 const Header = () => {
   const { token, user } = useAppSelector((state) => state.auth);
@@ -40,7 +41,9 @@ const Header = () => {
   };
   return (
     <div className="flex justify-between items-center px-4 py-2 shadow-sm">
-      <Image src={"/logo.svg"} alt="logo" width={60} height={60}></Image>
+      <Link href={"/"}>
+        <Image src={"/logo.svg"} alt="logo" width={60} height={60}></Image>
+      </Link>
 
       {token ? (
         <div className="flex items-center gap-4">
