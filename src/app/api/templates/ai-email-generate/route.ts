@@ -4,9 +4,14 @@ import Template from "@/models/templates";
 import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
-connect();
+export const config = {
+  runtime: "edge", 
+  maxDuration: 10, 
+};
+
 export async function POST(req: NextRequest){
     try {
+        await connect();
         const {prompt,email, description} = await req.json();
         if (!prompt || !email || !description) {
             return NextResponse.json(

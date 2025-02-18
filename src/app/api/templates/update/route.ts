@@ -1,8 +1,15 @@
+import { connect } from "@/config/database";
 import Template from "@/models/templates";
 import { NextRequest, NextResponse } from "next/server";
 
+export const config = {
+  runtime: "edge", 
+  maxDuration: 10, 
+};
+
 export async function   PUT(req:NextRequest) {
     try {
+        await connect();
         const {id, design} = await req.json();
 
         if(!id || !design){

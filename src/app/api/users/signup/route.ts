@@ -3,10 +3,14 @@ import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt'
 
-connect()
+export const config = {
+  runtime: "edge", 
+  maxDuration: 10, 
+};
 
 export async function POST(request: NextRequest) {
     try {
+        await connect()
         const { firstName, lastName, email, password } = await request.json();
         if (!firstName || !lastName || !email || !password) {
             return NextResponse.json({

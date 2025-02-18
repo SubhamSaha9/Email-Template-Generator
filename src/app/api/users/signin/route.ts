@@ -4,10 +4,14 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { connect } from "@/config/database";
 
-connect();
+export const config = {
+  runtime: "edge", 
+  maxDuration: 10, 
+};
 
 export async function POST(request: NextRequest) {
   try {
+    await connect();
     const { email, password } = await request.json();
     if (!email || !password) {
       return NextResponse.json(

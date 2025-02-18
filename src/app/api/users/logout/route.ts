@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 
+export const config = {
+  runtime: "edge", 
+  maxDuration: 10, 
+};
 
 export async function GET() {
     try {
